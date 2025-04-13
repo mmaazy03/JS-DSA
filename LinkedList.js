@@ -165,7 +165,7 @@ const myLinkedList = new LinkedList(0);
 myLinkedList.push(1);
 myLinkedList.push(2);
 // console.log("myLinkedList before pop", JSON.stringify(myLinkedList, null, 2));
-// myLinkedList.pop();
+myLinkedList.pop();
 // myLinkedList.unshift(4);
 // myLinkedList.shift();
 // console.log(myLinkedList.getFirst());
@@ -175,6 +175,6 @@ myLinkedList.push(2);
 // console.log(myLinkedList.set(0, 10));
 // console.log(myLinkedList.insert(2, 4));
 // console.log(myLinkedList.size());
-console.log(myLinkedList.clear());
+// console.log(myLinkedList.clear());
 
 console.log("myLinkedList", JSON.stringify(myLinkedList, null, 2));

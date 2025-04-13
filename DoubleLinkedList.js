@@ -30,35 +30,38 @@ class DoublyLinkedList {
   }
 
   pop() {
-    if (!this.head) {
+    if (!this.head || this.length === 0) {
       return undefined;
     }
-    let temp = this.head;
-    let prev = this.head;
-
-    while (temp.next) {
-      prev = temp;
-      temp = temp.next;
-    }
-
-    this.tail = prev;
-    this.tail.next = null;
-    this.length--;
-
-    if (this.length === 0) {
+    if (this.length === 1) {
       this.head = null;
       this.tail = null;
     }
+    const temp = this.tail;
+    this.tail = this.tail.prev;
+    this.tail.next = null;
+
+    this.length--;
+    temp.next = null;
+    temp.prev = null;
+    console.log("TEMP", temp);
   }
 
   unshift(value) {
     let newNode = new Node(value);
 
-    if (!this.head) {
+    if (this.length === 0) {
       this.head = newNode;
       this.tail = newNode;
     }
+
+    // this.head.prev = newNode;
+    // newNode.next = this.head;
+    // this.head = newNode;
+    // done by me
+
     newNode.next = this.head;
+    this.head.prev = newNode;
     this.head = newNode;
 
     this.length++;
@@ -69,20 +72,21 @@ class DoublyLinkedList {
       return undefined;
     }
 
-    let temp = this.head.next;
-    this.head = temp;
-
-    // 1. point first node and element
-    // let temp = this.head;
-    // this.head = this.head.next;
-
-    this.length--;
-    if (this.length === 0) {
+    if (this.length === 1) {
+      this.head = null;
       this.tail = null;
     }
-    console.log("TEM", temp);
+
+    let temp = this.head;
+    this.head = this.head.next;
+    this.head.prev = null;
+    temp.prev = null;
+    temp.next = null;
+
+    this.length--;
   }
 
+  // below are methods copied from single linked list
   getFirst() {
     return this.head;
   }
@@ -165,11 +169,12 @@ class DoublyLinkedList {
 const myLinkedList = new DoublyLinkedList(0);
 
 myLinkedList.push(1);
-// myLinkedList.push(2);
+myLinkedList.push(2);
+myLinkedList.push(3);
 // console.log("myLinkedList before pop", JSON.stringify(myLinkedList, null, 2));
 // myLinkedList.pop();
 // myLinkedList.unshift(4);
-// myLinkedList.shift();
+myLinkedList.shift();
 // console.log(myLinkedList.getFirst());
 // myLinkedList.getLast();
 // console.log(myLinkedList.getLast());
