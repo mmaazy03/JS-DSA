@@ -82,8 +82,7 @@ const getChunksOfArray = (array, chunk) => {
 
   while (index < array.length) {
     const chunked = array.slice(index, index + chunk);
-    console.log("ARR", array);
-    console.log("IMNDEX", index);
+
     index = index + chunk;
     result.push(chunked);
   }
