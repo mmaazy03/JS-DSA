@@ -71,6 +71,77 @@ class BST {
 
     return false;
   }
+
+  bfs() {
+    let current = this.root;
+    let queue = [];
+    let data = [];
+
+    queue.push(current);
+
+    //?? In Breadth first we visit row vise opr breadth wise/
+    // ?? when we shift one le,ent from queue it is ususally left node first
+
+    while (queue.length) {
+      // console.log("QUEUE--------->>>", queue);
+      current = queue.shift();
+      // console.log("CURRENT------------->>", current);
+      data.push(current.value);
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+      // console.log("DATA-------------->>>", data);
+    }
+  }
+
+  dfspre() {
+    let current = this.root;
+    let stack = [];
+
+    stack.push(current);
+
+    // ?? IN DFS we push current node right first and then left one
+    // ?? the reason is that it operates on LIFO(stack) so everytime we push left one in last and
+    // ?? and then take out last element from stack using pop it will always consider left value and we will go in depth wise rather than
+    // ?? rather than breadth wise
+
+    // ?? IN DFS PRE WE Go left--> and then right
+    // ?? the whole logic revolves around pop method this is how it makes it more push
+
+    while (stack.length) {
+      current = stack.pop();
+
+      if (current.right) stack.push(current.right);
+      if (current.left) stack.push(current.left);
+    }
+  }
+
+  dfspost() {
+    let current = this.root;
+    let stack = [];
+    let data = [];
+
+    stack.push(current);
+
+    // ?? IN DFS we push current node left first and then right one
+    // ?? the reason is that it operates on LIFO(stack) so everytime we push right one in last and
+    // ?? and then take out last element from stack using pop it will always consider right value and we will go in depth wise rather than
+    // ?? rather than breadth wise
+    // ?? IN DFS PRE WE Go right--> and then left
+    // ?? the whole logic revolves around pop method this is how it makes it
+    // ?? and in the end then we do data.reverse() so that whole lost can be reversed
+    // ?? and then root will come in last
+
+    while (stack.length) {
+      console.log("STACK--------->>>", stack);
+      current = stack.pop();
+      data.push(current.value);
+
+      if (current.left) stack.push(current.left);
+      if (current.right) stack.push(current.right);
+    }
+
+    data.reverse();
+  }
 }
 
 const tree = new BST();
@@ -80,8 +151,10 @@ tree.insert(3);
 tree.insert(1);
 tree.insert(7);
 tree.insert(9);
-tree.insert(10);
-tree.insert(0);
-tree.insert(1.5);
-console.log(tree.includes(0.75));
+// tree.insert(10);
+// tree.insert(0);
+// tree.insert(1.5);
+// tree.bfs();
+// tree.dfspre();
+tree.dfspost();
 // console.log(tree);
